@@ -3,6 +3,10 @@ using UnityEngine;
 using NaughtyAttributes;
 using DG.Tweening;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class Mushroom : MonoBehaviour
 {
     [SerializeField] string PlayerTag = "Player";
@@ -47,9 +51,12 @@ public class Mushroom : MonoBehaviour
     public void Grow()
     {
         this.transform.localScale = Vector3.zero;
-        this.gameObject.SetActive(true);
+        SetChildrenActive(true); 
         this.transform.DOScale(_initialScale, _animationDuration).SetEase(Ease.OutBack)
-            .OnComplete(() => OnFinishedAnimating?.Invoke());
+            .OnComplete(() => {
+                OnFinishedAnimating?.Invoke();
+            }
+        );
     }
 
     public void Shrink()
@@ -58,10 +65,16 @@ public class Mushroom : MonoBehaviour
             .Append(this.transform.DOShakePosition(_shakeDuration, _shakeStrength, fadeOut: false))
             .Append(this.transform.DOScale(Vector3.zero, _animationDuration).SetEase(Ease.InBack))
             .OnComplete( () => { 
-                this.gameObject.SetActive(false); 
+                SetChildrenActive(false); 
                 OnFinishedAnimating?.Invoke();
             }
         );
+    }
+
+    private void SetChildrenActive(bool newActive)
+    {
+        foreach (Transform child in this.transform)
+            child.gameObject.SetActive(newActive);
     }
 
 #if UNITY_EDITOR
@@ -69,13 +82,24 @@ public class Mushroom : MonoBehaviour
     public void Activate()
     {
         this.gameObject.SetActive(true);
+
+        foreach (Transform child in this.transform)
+        {
+            child.gameObject.SetActive(true);
+            EditorUtility.SetDirty(child);
+        }
+            
     }
 
 
     [Button]
     public void Deactivate()
     {
-        this.gameObject.SetActive(false);
+        foreach (Transform child in this.transform)
+        {
+            child.gameObject.SetActive(false);
+            EditorUtility.SetDirty(child);
+        }
     }
 #endif
 }

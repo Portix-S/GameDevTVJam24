@@ -4,9 +4,14 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class MushroomSlot : MonoBehaviour
 {
     [SerializeField] List<MushroomSlotDifficulty> _difficulties = new List<MushroomSlotDifficulty>();
+    [SerializeField] float _difficultyTransitionDelay = 1.0f;
 
     [ReadOnly][SerializeField]
     private int _playerCount;
@@ -82,6 +87,7 @@ public class MushroomSlot : MonoBehaviour
         _difficulties[_currentDifficulty].Deactivate();
 
         yield return new WaitUntil(() => !_difficulties[_currentDifficulty].IsActive);
+        yield return new WaitForSeconds(_difficultyTransitionDelay);
 
         ActivateNewDifficulty(newDifficulty);
     }
@@ -108,12 +114,16 @@ public class MushroomSlot : MonoBehaviour
             else
                 _difficulties[i].EditorDeactivate();
         }
+
+        EditorUtility.SetDirty(this);
     }
 
     public void SetDifficulty(int newDifficulty)
     {
         _difficultyToSet = newDifficulty;
         SetDifficulty();
+
+        EditorUtility.SetDirty(this);
     }
 
     [Button]
@@ -124,6 +134,8 @@ public class MushroomSlot : MonoBehaviour
         foreach (Transform child in this.transform)
             if (child.TryGetComponent<MushroomSlotDifficulty>(out var difficulty))
                 _difficulties.Add(difficulty);
+
+        EditorUtility.SetDirty(this);
     }
 
     [Button]
@@ -133,6 +145,8 @@ public class MushroomSlot : MonoBehaviour
 
         foreach (var difficulty in _difficulties)
             difficulty.GetMushroomReferences();
+
+        EditorUtility.SetDirty(this);
     }
 #endif
 }

@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class MushroomSlotManager : MonoBehaviour
 {
     [SerializeField] List<MushroomSlot> _mushroomSlots;
@@ -15,6 +19,8 @@ public class MushroomSlotManager : MonoBehaviour
     {
         foreach (var slot in _mushroomSlots)
             slot.SetDifficulty(_difficultyToSet);
+
+        EditorUtility.SetDirty(this);
     }
 
     [Button]
@@ -25,6 +31,8 @@ public class MushroomSlotManager : MonoBehaviour
         foreach (Transform child in this.transform)
             if (child.TryGetComponent<MushroomSlot>(out var slot))
                 _mushroomSlots.Add(slot);
+
+        EditorUtility.SetDirty(this);
     }
 
     [Button]
@@ -34,6 +42,8 @@ public class MushroomSlotManager : MonoBehaviour
 
         foreach (var slot in _mushroomSlots)
             slot.GetAllNeededReferencesRecursively();
+        
+        EditorUtility.SetDirty(this);
     }
 #endif
 }
