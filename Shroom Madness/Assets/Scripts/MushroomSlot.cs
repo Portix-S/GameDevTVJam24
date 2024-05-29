@@ -17,6 +17,7 @@ public class MushroomSlot : MonoBehaviour
     public event Action<int> OnUpdatedPlayerCount;
 
     public int CurrentDifficulty => _currentDifficulty;
+
     public int PlayerCount 
     {
         get => _playerCount;
@@ -80,7 +81,6 @@ public class MushroomSlot : MonoBehaviour
     {
         _difficulties[_currentDifficulty].Deactivate();
 
-        // TODO: Event?
         yield return new WaitUntil(() => !_difficulties[_currentDifficulty].IsActive);
 
         ActivateNewDifficulty(newDifficulty);
@@ -104,9 +104,9 @@ public class MushroomSlot : MonoBehaviour
         for (int i = 0; i < _difficulties.Count; i++)
         {
             if (i == _difficultyToSet)
-                _difficulties[i].Activate();
+                _difficulties[i].EditorActivate();
             else
-                _difficulties[i].Deactivate();
+                _difficulties[i].EditorDeactivate();
         }
     }
 

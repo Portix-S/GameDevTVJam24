@@ -1,14 +1,26 @@
 using System;
 using UnityEngine;
 using NaughtyAttributes;
+using DG.Tweening;
 
 public class Mushroom : MonoBehaviour
 {
-    private const string PlayerTag = "Player";
+    [SerializeField] string PlayerTag = "Player";
+    [SerializeField] float _animationDuration = 0.5f;
+    [SerializeField] float _shakeStrength = 0.3f;
+    [SerializeField] float _shakeDuration = 2.0f;
+
+    private Vector3 _initialScale;
 
     public event Action OnPlayerEntered;
     public event Action OnPlayerExit;
 
+    public event Action OnFinishedAnimating;
+
+    private void Awake()
+    {
+        _initialScale = this.transform.localScale;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,17 +34,48 @@ public class Mushroom : MonoBehaviour
             OnPlayerExit?.Invoke();
     }
 
-    [Button]
+    public void Grow(float delay)
+    {
+        Invoke(nameof(Grow), delay);
+    }
+
+    public void Shrink(float delay)
+    {
+        Invoke(nameof(Shrink), delay);
+    }
+
     public void Grow()
     {
-        // TODO: Animation
+        this.transform.localScale = Vector3.zero;
+        this.gameObject.SetActive(true);
+        this.transform.DOScale(_initialScale, _animationDuration).SetEase(Ease.OutBack)
+            .OnComplete(() => OnFinishedAnimating?.Invoke());
+    }
+
+    public void Shrink()
+    {
+        DOTween.Sequence()
+            .Append(this.transform.DOShakePosition(_shakeDuration, _shakeStrength, fadeOut: false))
+            .Append(this.transform.DOScale(Vector3.zero, _animationDuration).SetEase(Ease.InBack))
+            .OnComplete( () => { 
+                this.gameObject.SetActive(false); 
+                OnFinishedAnimating?.Invoke();
+            }
+        );
+    }
+
+#if UNITY_EDITOR
+    [Button]
+    public void Activate()
+    {
         this.gameObject.SetActive(true);
     }
 
+
     [Button]
-    public void Shrink()
+    public void Deactivate()
     {
-        // TODO: Animation
         this.gameObject.SetActive(false);
     }
+#endif
 }
