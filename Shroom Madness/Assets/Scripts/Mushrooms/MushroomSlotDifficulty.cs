@@ -81,6 +81,13 @@ public class MushroomSlotDifficulty : MonoBehaviour
     private void GrowMushrooms()
     {
         _remainingMushroomsToAnimate = _mushrooms.Count;
+
+        if (_remainingMushroomsToAnimate == 0)
+        {
+            FinishedStateTransition();
+            return;
+        }
+
         _isAnimating = true;
 
         foreach (var mushroom in _mushrooms)
@@ -92,6 +99,14 @@ public class MushroomSlotDifficulty : MonoBehaviour
 
     private void ShrinkMushrooms()
     {   
+        _remainingMushroomsToAnimate = _mushrooms.Count;
+
+        if (_remainingMushroomsToAnimate == 0)
+        {
+            FinishedStateTransition();
+            return;
+        }
+
         _remainingMushroomsToAnimate = _mushrooms.Count;
         _isAnimating = true;
 

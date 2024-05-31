@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using System.Linq;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -17,11 +19,22 @@ public class MushroomSlot : MonoBehaviour
     private int _playerCount;
     
     [ReadOnly][SerializeField]
-    private int _currentDifficulty;
+    private int _currentDifficultyIndex;
+    private int _nextDifficultyIndex;
+    private bool _isTransitioningSmoothly;
 
     public event Action<int> OnUpdatedPlayerCount;
 
-    public int CurrentDifficulty => _currentDifficulty;
+    public int CurrentDifficulty => _currentDifficultyIndex + 1;
+    public int DifficultyAfterAnimation => _nextDifficultyIndex + 1;
+    public int MaxDifficulty => _difficulties.Count;
+
+    public bool IsOnMinDifficulty => CurrentDifficulty == 1;
+    public bool IsOnMaxDifficulty => CurrentDifficulty == MaxDifficulty;
+    public bool IsAnimating => _isTransitioningSmoothly || _difficulties.Any(x => x.IsAnimating);
+    public bool CanIncreaseDifficulty => !IsOnMaxDifficulty && !IsAnimating;
+    public bool CanDecreaseDifficulty => !IsOnMinDifficulty && !IsAnimating;
+    
 
     public int PlayerCount 
     {
@@ -63,40 +76,49 @@ public class MushroomSlot : MonoBehaviour
 
     public void IncreaseDifficulty()
     {
-        ChangeDifficultyTo(CurrentDifficulty + 1);
+        ChangeDifficultyTo(_currentDifficultyIndex + 1);
     }
 
     public void DecreaseDifficulty()
     {
-        ChangeDifficultyTo(CurrentDifficulty - 1);
+        ChangeDifficultyTo(_currentDifficultyIndex - 1);
     }
 
-    private void ChangeDifficultyTo(int newDifficulty)
+    private void ChangeDifficultyTo(int newDifficultyIndex)
     {
-        if (newDifficulty < 0 || newDifficulty >= _difficulties.Count)
+        if (newDifficultyIndex < 0 || newDifficultyIndex >= _difficulties.Count)
             return;
 
-        if (_difficulties[_currentDifficulty].IsActive)
-            StartCoroutine(TransitionDifficultSmoothlyTo(newDifficulty));
+        _nextDifficultyIndex = _currentDifficultyIndex;
+
+        if (_difficulties[_currentDifficultyIndex].IsActive)
+        {
+            _isTransitioningSmoothly = true;
+            StartCoroutine(TransitionDifficultSmoothlyTo(newDifficultyIndex));
+        }
         else
-            ActivateNewDifficulty(newDifficulty);
+            ActivateNewDifficulty(newDifficultyIndex);
     }
 
-    private IEnumerator TransitionDifficultSmoothlyTo(int newDifficulty)
+    private IEnumerator TransitionDifficultSmoothlyTo(int newDifficultyIndex)
     {
-        _difficulties[_currentDifficulty].Deactivate();
 
-        yield return new WaitUntil(() => !_difficulties[_currentDifficulty].IsActive);
+        _difficulties[_currentDifficultyIndex].Deactivate();
+
+        yield return new WaitUntil(() => !_difficulties[_currentDifficultyIndex].IsActive);
         yield return new WaitForSeconds(_difficultyTransitionDelay);
 
-        ActivateNewDifficulty(newDifficulty);
+        _isTransitioningSmoothly = false;
+
+        ActivateNewDifficulty(newDifficultyIndex);
     }
 
     private void ActivateNewDifficulty(int newDifficulty)
     {
         _playerCount = 0;
 
-        _currentDifficulty = newDifficulty;
+        _currentDifficultyIndex = newDifficulty;
+        _nextDifficultyIndex = _currentDifficultyIndex;
         _difficulties[newDifficulty].Activate();
     }
     
@@ -114,6 +136,8 @@ public class MushroomSlot : MonoBehaviour
             else
                 _difficulties[i].EditorDeactivate();
         }
+
+        _currentDifficultyIndex = _difficultyToSet;
 
         EditorUtility.SetDirty(this);
     }

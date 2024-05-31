@@ -81,14 +81,11 @@ public class Mushroom : MonoBehaviour
     [Button]
     public void Activate()
     {
-        this.gameObject.SetActive(true);
-
         foreach (Transform child in this.transform)
         {
             child.gameObject.SetActive(true);
             EditorUtility.SetDirty(child);
         }
-            
     }
 
 
