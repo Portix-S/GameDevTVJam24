@@ -23,7 +23,7 @@ public class InputManager : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
-        playerInput.transform.SetParent(this.gameObject.transform);
+        //playerInput.transform.SetParent(this.gameObject.transform);
         playerInput.name = "Player " + (playerInput.playerIndex + 1);
         playerInput.DeactivateInput();
     }
@@ -33,9 +33,9 @@ public class InputManager : MonoBehaviour
         foreach (var input in PlayerInput.all)
         {
             input.ActivateInput();
-            input.GetComponent<MeshRenderer>().enabled = true;
-            input.GetComponent<Collider>().enabled = true;
-            input.GetComponent<Rigidbody>().isKinematic = false;
+            //input.GetComponent<MeshRenderer>().enabled = true;
+            //input.GetComponent<Collider>().enabled = true;
+            //input.GetComponent<Rigidbody>().isKinematic = false;
             input.transform.position = spawns[input.playerIndex].position;
         }
         inputUI.SetActive(false);
