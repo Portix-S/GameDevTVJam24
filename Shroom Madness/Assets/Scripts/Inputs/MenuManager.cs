@@ -1,19 +1,33 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public static MenuManager instance;
+    
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject inputsMenu;
+    [SerializeField] private GameObject reconnectMenu;
     private GameObject currentMenu;
     
     private InputManager inputManager;
     private PlayerInputManager playerInputManager;
     private void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+        
         mainMenu.SetActive(true);
         inputsMenu.SetActive(false);
+        reconnectMenu.SetActive(false);
         currentMenu = mainMenu;
         inputManager = GetComponent<InputManager>();
         playerInputManager = GetComponent<PlayerInputManager>();
@@ -39,5 +53,26 @@ public class MenuManager : MonoBehaviour
         currentMenu = mainMenu;
     }
     
+    public void OpenReconnectMenu()
+    {
+        currentMenu.SetActive(false);
+        reconnectMenu.SetActive(true);
+        currentMenu = reconnectMenu;
+        inputManager.PauseGame();
+    }
     
+    public void CloseReconnectMenu()
+    {
+        currentMenu.SetActive(false);
+        currentMenu = mainMenu;
+        inputManager.ResumeGame();
+    }
+
+    public void MainMenu()
+    {
+        // Reload Scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        inputManager.LeaveGame();
+        Back();
+    }
 }

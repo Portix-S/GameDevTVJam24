@@ -8,6 +8,7 @@ public class PlayerMovementTest : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float speed = 5f;
     private bool playing = false;
+    private bool onPauseMenu = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -49,5 +50,28 @@ public class PlayerMovementTest : MonoBehaviour
     {
         if(!playing)
             Destroy(this.gameObject);
+    }
+    
+    public void DeviceLost(PlayerInput playerInput)
+    {
+        if (!playing)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            playing = false;
+            onPauseMenu = true;
+            // Open a menu to reconnect the device
+            MenuManager.instance.OpenReconnectMenu();
+        }
+    }
+    
+    public void DeviceReconnected(PlayerInput playerInput)
+    {
+        if(!onPauseMenu) return;
+        onPauseMenu = false;
+        playing = true;
+        MenuManager.instance.CloseReconnectMenu();
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,9 +16,10 @@ public class InputManager : MonoBehaviour
     private int firstAvailablePlace;
     private int playersReady;
     private PlayerInputManager playerInputManager;
+    private List<GameObject> players = new();
 
     [SerializeField] private GameObject playButton;
-    
+    private MushroomSlotManager mushroomSlotManager;
     
     // Basic Singleton pattern and variable initialization
     private void Start()
@@ -32,10 +34,11 @@ public class InputManager : MonoBehaviour
             {
                 availablePlacesToJoin[i] = -1;
             }
+            mushroomSlotManager = FindObjectOfType<MushroomSlotManager>();
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 
@@ -46,7 +49,8 @@ public class InputManager : MonoBehaviour
         playerInput.name = "Player " + (playerInput.playerIndex + 1);
         // playerInput.DeactivateInput();
         playerInput.GetComponent<PlayerMovementTest>().Joined();
-        
+        players.Add(playerInput.gameObject);
+
         // Adds the player to the available places to join
         availablePlacesToJoin[firstAvailablePlace] = playerInput.playerIndex;
         playersReadyMenu[firstAvailablePlace].GetComponent<PlayerJoin>().Join(firstAvailablePlace+1);
@@ -113,6 +117,36 @@ public class InputManager : MonoBehaviour
         // Start Mushroom Slot Manager logic
         FindObjectOfType<MushroomSlotManager>().Initialize();
         
+        // Find all players
+        // players = new List<GameObject>();
+        
     }
 
+    public void PauseGame()
+    {
+        mushroomSlotManager.Stop();
+        foreach (var input in PlayerInput.all)
+        {
+            input.DeactivateInput();
+        }
+    }
+    
+    public void ResumeGame()
+    {
+        mushroomSlotManager.Initialize();
+        foreach (var input in PlayerInput.all)
+        {
+            input.ActivateInput();
+        }
+    }
+
+    public void LeaveGame()
+    {
+        // Destroys all players and resets the available places to join
+        foreach (GameObject player in players)
+        {
+            Destroy(player);
+        }
+    }
+    
 }
