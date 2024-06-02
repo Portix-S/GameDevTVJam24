@@ -37,7 +37,7 @@ public class MushroomSlotManager : MonoBehaviour
 
     private void Awake()
     {
-        Initialize();
+        // Initialize();
     }
     
     public void Initialize()

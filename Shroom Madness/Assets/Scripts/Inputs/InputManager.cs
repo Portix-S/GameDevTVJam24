@@ -109,6 +109,10 @@ public class InputManager : MonoBehaviour
         
         // Deactivates the input UI
         inputUI.SetActive(false);
+        
+        // Start Mushroom Slot Manager logic
+        FindObjectOfType<MushroomSlotManager>().Initialize();
+        
     }
 
 }
