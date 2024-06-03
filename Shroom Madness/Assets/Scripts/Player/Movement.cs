@@ -24,6 +24,8 @@ namespace Player
         float _isGroundedRadius;
         
         Rigidbody _rigidbody;
+        private bool playing = false;
+        private bool onPauseMenu = false;
 
         void Awake()
         {
@@ -72,6 +74,45 @@ namespace Player
 
             RaycastHit firstHit = _groundedHits[0];
             return firstHit.normal;
+        }
+        
+        public void Joined()
+        {
+            playing = false;
+        }
+
+        public void Playing()
+        {
+            playing = true;
+        }
+
+        public void Leave(InputAction.CallbackContext context)
+        {
+            if(!playing)
+                Destroy(this.gameObject);
+        }
+    
+        public void DeviceLost(PlayerInput playerInput)
+        {
+            if (!playing)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                playing = false;
+                onPauseMenu = true;
+                // Open a menu to reconnect the device
+                MenuManager.instance.OpenReconnectMenu();
+            }
+        }
+    
+        public void DeviceReconnected(PlayerInput playerInput)
+        {
+            if(!onPauseMenu) return;
+            onPauseMenu = false;
+            playing = true;
+            MenuManager.instance.CloseReconnectMenu();
         }
         
 #if UNITY_EDITOR

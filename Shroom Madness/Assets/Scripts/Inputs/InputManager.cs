@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -48,7 +49,7 @@ public class InputManager : MonoBehaviour
         playerInput.transform.SetParent(this.gameObject.transform);
         playerInput.name = "Player " + (playerInput.playerIndex + 1);
         // playerInput.DeactivateInput();
-        playerInput.GetComponent<PlayerMovementTest>().Joined();
+        playerInput.GetComponent<Movement>().Joined();
         players.Add(playerInput.gameObject);
 
         // Adds the player to the available places to join
@@ -104,9 +105,9 @@ public class InputManager : MonoBehaviour
         foreach (var input in PlayerInput.all)
         {
             // input.ActivateInput();
-            input.GetComponent<PlayerMovementTest>().Playing();
-            input.GetComponent<MeshRenderer>().enabled = true;
-            input.GetComponent<Collider>().enabled = true;
+            input.GetComponent<Movement>().Playing();
+            // input.GetComponent<MeshRenderer>().enabled = true;
+            // input.GetComponent<Collider>().enabled = true;
             // input.GetComponent<Rigidbody>().isKinematic = false;
             input.transform.position = spawns[input.playerIndex].position;
         }
