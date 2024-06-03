@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
-using DG.Tweening;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class MushroomSlotDifficulty : MonoBehaviour
 {
@@ -12,10 +15,12 @@ public class MushroomSlotDifficulty : MonoBehaviour
     
     [ReadOnly][SerializeField]
     private bool _isActive;
+    private bool _isAnimating;
     private int _remainingMushroomsToAnimate;
 
 
     public bool IsActive => _isActive;
+    public bool IsAnimating => _isAnimating;
 
     public event Action OnPlayerEntered;
     public event Action OnPlayerExit;
@@ -26,7 +31,7 @@ public class MushroomSlotDifficulty : MonoBehaviour
         {
             mushroom.OnPlayerEntered += PlayerEntered;
             mushroom.OnPlayerExit += PlayerExit;
-            mushroom.OnFinishedAnimating += FinishedStateTransition;
+            mushroom.OnFinishedAnimating += OnMushroomFinishedShrinking;
         }
     }
 
@@ -36,14 +41,14 @@ public class MushroomSlotDifficulty : MonoBehaviour
         {
             mushroom.OnPlayerEntered -= PlayerEntered;
             mushroom.OnPlayerExit -= PlayerExit;
-            mushroom.OnFinishedAnimating -= FinishedStateTransition;
+            mushroom.OnFinishedAnimating -= OnMushroomFinishedShrinking;
         }
     }
 
     private void FinishedStateTransition()
     {
         _isActive = !_isActive;
-        // TODO: Event?
+        _isAnimating = false;
     }
 
     private void OnMushroomFinishedShrinking()
@@ -65,25 +70,25 @@ public class MushroomSlotDifficulty : MonoBehaviour
 
     public void Activate()
     {
-        _isActive = true;
         GrowMushrooms();
     }
 
     public void Deactivate()
     {
         ShrinkMushrooms();
-
-    }
-
-    private void ReallyDeactivate()
-    {
-        _isActive = false;
-        ShrinkMushrooms();
     }
 
     private void GrowMushrooms()
     {
         _remainingMushroomsToAnimate = _mushrooms.Count;
+
+        if (_remainingMushroomsToAnimate == 0)
+        {
+            FinishedStateTransition();
+            return;
+        }
+
+        _isAnimating = true;
 
         foreach (var mushroom in _mushrooms)
         {
@@ -95,6 +100,15 @@ public class MushroomSlotDifficulty : MonoBehaviour
     private void ShrinkMushrooms()
     {   
         _remainingMushroomsToAnimate = _mushrooms.Count;
+
+        if (_remainingMushroomsToAnimate == 0)
+        {
+            FinishedStateTransition();
+            return;
+        }
+
+        _remainingMushroomsToAnimate = _mushrooms.Count;
+        _isAnimating = true;
 
         foreach (var mushroom in _mushrooms)
         {
@@ -112,6 +126,8 @@ public class MushroomSlotDifficulty : MonoBehaviour
         foreach (Transform child in this.transform)
             if (child.TryGetComponent<Mushroom>(out var mushroom))
                 _mushrooms.Add(mushroom);
+
+        EditorUtility.SetDirty(this);
     }
 
     [Button]
@@ -121,6 +137,8 @@ public class MushroomSlotDifficulty : MonoBehaviour
         
         foreach (var mushroom in _mushrooms)
             mushroom.Activate();
+
+        EditorUtility.SetDirty(this);
     }
 
     [Button]
@@ -130,6 +148,8 @@ public class MushroomSlotDifficulty : MonoBehaviour
         
         foreach (var mushroom in _mushrooms)
             mushroom.Deactivate();
+
+        EditorUtility.SetDirty(this);
     }
 #endif
 

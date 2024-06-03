@@ -51,7 +51,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69ca0c41399d68418d7d06688e43f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mushroomSlots: []
+  _mushroomSlots:
+  - {fileID: 8462419245445642673}
+  - {fileID: 477362469174309228}
+  - {fileID: 7934059962246895469}
+  - {fileID: 3833186767230327485}
+  - {fileID: 8398272611677498332}
+  - {fileID: 5716486479441252077}
+  - {fileID: 6824764911083105527}
+  minHazardCooldown: 0
+  maxHazardCooldown: 0
+  targetDifficulty: 0
+  _difficultyToSet: 0
 --- !u!1001 &762482331229045304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60,6 +71,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7225203560698222647}
     m_Modifications:
+    - target: {fileID: 293038223498806869, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434997475591162807, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857555795065360243, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003900036933042833, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -104,9 +131,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6715877649087100650, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857830441296984840, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7322658764199530444, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_Name
       value: MushroomSlot (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910727051613107382, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057206945728657748, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8135398289842383810, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: _isActive
@@ -122,6 +165,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
   m_PrefabInstance: {fileID: 762482331229045304}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7934059962246895469 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7246169600969889109, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+  m_PrefabInstance: {fileID: 762482331229045304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ffe82b83ba24749a5b1c0ad59b7a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1153828249410125449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,6 +184,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7225203560698222647}
     m_Modifications:
+    - target: {fileID: 293038223498806869, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434997475591162807, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857555795065360243, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003900036933042833, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -174,9 +244,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6715877649087100650, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857830441296984840, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7322658764199530444, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_Name
       value: MushroomSlot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910727051613107382, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057206945728657748, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8135398289842383810, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: _isActive
@@ -192,6 +278,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
   m_PrefabInstance: {fileID: 1153828249410125449}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8398272611677498332 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7246169600969889109, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+  m_PrefabInstance: {fileID: 1153828249410125449}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ffe82b83ba24749a5b1c0ad59b7a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1296787842029858020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,6 +297,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7225203560698222647}
     m_Modifications:
+    - target: {fileID: 293038223498806869, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434997475591162807, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857555795065360243, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003900036933042833, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -244,9 +357,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6715877649087100650, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857830441296984840, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7322658764199530444, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_Name
       value: MushroomSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910727051613107382, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057206945728657748, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8135398289842383810, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: _isActive
@@ -293,6 +422,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
   m_PrefabInstance: {fileID: 1296787842029858020}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8462419245445642673 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7246169600969889109, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+  m_PrefabInstance: {fileID: 1296787842029858020}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ffe82b83ba24749a5b1c0ad59b7a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3160008471154269112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,6 +441,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7225203560698222647}
     m_Modifications:
+    - target: {fileID: 293038223498806869, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434997475591162807, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857555795065360243, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003900036933042833, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -345,9 +501,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6715877649087100650, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857830441296984840, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7322658764199530444, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_Name
       value: MushroomSlot (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910727051613107382, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057206945728657748, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8135398289842383810, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: _isActive
@@ -358,6 +530,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+--- !u!114 &5716486479441252077 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7246169600969889109, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+  m_PrefabInstance: {fileID: 3160008471154269112}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ffe82b83ba24749a5b1c0ad59b7a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7714571042334160662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
@@ -371,6 +554,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7225203560698222647}
     m_Modifications:
+    - target: {fileID: 293038223498806869, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434997475591162807, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857555795065360243, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003900036933042833, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -415,9 +614,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6715877649087100650, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857830441296984840, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7322658764199530444, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_Name
       value: MushroomSlot (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910727051613107382, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057206945728657748, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8135398289842383810, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: _isActive
@@ -428,6 +643,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+--- !u!114 &6824764911083105527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7246169600969889109, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+  m_PrefabInstance: {fileID: 4195665294995487138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ffe82b83ba24749a5b1c0ad59b7a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8857679761763489036 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
@@ -441,6 +667,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7225203560698222647}
     m_Modifications:
+    - target: {fileID: 293038223498806869, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434997475591162807, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857555795065360243, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003900036933042833, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -485,9 +727,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6715877649087100650, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857830441296984840, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7322658764199530444, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_Name
       value: MushroomSlot (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910727051613107382, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057206945728657748, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8135398289842383810, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: _isActive
@@ -503,6 +761,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
   m_PrefabInstance: {fileID: 5890048410110037992}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3833186767230327485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7246169600969889109, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+  m_PrefabInstance: {fileID: 5890048410110037992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ffe82b83ba24749a5b1c0ad59b7a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7066286898401485881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -511,6 +780,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7225203560698222647}
     m_Modifications:
+    - target: {fileID: 293038223498806869, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434997475591162807, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857555795065360243, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003900036933042833, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -555,9 +840,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6715877649087100650, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857830441296984840, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7322658764199530444, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: m_Name
       value: MushroomSlot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910727051613107382, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057206945728657748, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8135398289842383810, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
       propertyPath: _isActive
@@ -568,6 +869,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+--- !u!114 &477362469174309228 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7246169600969889109, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
+  m_PrefabInstance: {fileID: 7066286898401485881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ffe82b83ba24749a5b1c0ad59b7a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2505494485761263767 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4671696860672928942, guid: 7ba94f45b072ec44aab62e19562c9be8, type: 3}
