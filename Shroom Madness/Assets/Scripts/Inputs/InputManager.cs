@@ -14,16 +14,18 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private GameObject[] playersReadyMenu;
     [SerializeField] private int[] availablePlacesToJoin;
+    [SerializeField] private Material[] playerMaterials;
     private int firstAvailablePlace;
-    private int playersReady;
+    [SerializeField] private int playersReady;
     private PlayerInputManager playerInputManager;
     private List<GameObject> players = new();
 
     [SerializeField] private GameObject playButton;
     private MushroomSlotManager mushroomSlotManager;
-    
+    private bool isPlaying;
+
     // Basic Singleton pattern and variable initialization
-    private void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -56,6 +58,9 @@ public class InputManager : MonoBehaviour
         availablePlacesToJoin[firstAvailablePlace] = playerInput.playerIndex;
         playersReadyMenu[firstAvailablePlace].GetComponent<PlayerJoin>().Join(firstAvailablePlace+1);
 
+        // Change the player's material
+        playerInput.GetComponentInChildren<SkinnedMeshRenderer>().material = playerMaterials[firstAvailablePlace];
+        
         playersReady++;
         if (playersReady >= 2)
         {
@@ -94,12 +99,19 @@ public class InputManager : MonoBehaviour
         {
             playButton.SetActive(false);
         }
+        
+        // Remove player from players
+        players.Remove(playerInput.gameObject);
+        
+        CheckForWinner();
     }
 
     public void Play()
     {
         // Disables new players from joining after the game started
         playerInputManager.DisableJoining();
+
+        isPlaying = true;
         
         // Activates the input for all players and sets their position to the correct spawns
         foreach (var input in PlayerInput.all)
@@ -148,6 +160,19 @@ public class InputManager : MonoBehaviour
         {
             Destroy(player);
         }
+    }
+    
+    public void CheckForWinner()
+    {
+        // Check if there is only one player left
+        if (playersReady == 1 && isPlaying)
+        {
+            // Display the victory menu
+            MenuManager.instance.OpenVictoryMenu(players[0].name);
+            // Pause the game
+            PauseGame();
+        }
+
     }
     
 }

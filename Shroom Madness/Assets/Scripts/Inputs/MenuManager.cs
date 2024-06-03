@@ -1,4 +1,5 @@
 
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -10,11 +11,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject inputsMenu;
     [SerializeField] private GameObject reconnectMenu;
+    [SerializeField] private GameObject victoryMenu;
+    [SerializeField] private TextMeshProUGUI victoryText;
     private GameObject currentMenu;
     
     private InputManager inputManager;
     private PlayerInputManager playerInputManager;
-    private void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -22,12 +25,13 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         
         mainMenu.SetActive(true);
         inputsMenu.SetActive(false);
         reconnectMenu.SetActive(false);
+        victoryMenu.SetActive(false);
         currentMenu = mainMenu;
         inputManager = GetComponent<InputManager>();
         playerInputManager = GetComponent<PlayerInputManager>();
@@ -74,5 +78,14 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         inputManager.LeaveGame();
         Back();
+    }
+    
+    public void OpenVictoryMenu(string winnerName)
+    {
+        currentMenu.SetActive(false);
+        victoryMenu.SetActive(true);
+        currentMenu = victoryMenu;
+        
+        victoryText.text = winnerName + " wins!";
     }
 }

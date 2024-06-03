@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MushroomsTest.unity
+    guid: 278c3537c2b88c94290ebd14b173d6d8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fd5e6af4c7c22a4438ae98c79f185102, type: 2}

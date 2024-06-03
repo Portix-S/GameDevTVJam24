@@ -114,7 +114,15 @@ namespace Player
             playing = true;
             MenuManager.instance.CloseReconnectMenu();
         }
-        
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if (other.gameObject.CompareTag("Ground") && playing)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
 #if UNITY_EDITOR
         void Update()
         {
