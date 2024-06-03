@@ -1,4 +1,4 @@
-using Service;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,55 +9,97 @@ namespace Player
     {
         [SerializeField] float _maxSpeed = 10;
         [SerializeField] float _acceleration = 1;
+        
+        [Header("Jump parameters")]
         [SerializeField] float _jumpForce = 5;
+        [SerializeField] LayerMask _jumpSurfacesLayer;
+        [SerializeField] SphereCollider _baseCollider;
+        [SerializeField, Range(0.01f, 0.99f)] float _groundedScale = 0.9f;
+        [SerializeField] float _groundedOffset = 0.5f;
+
+        Vector3 _movementDirection;
+
+        readonly RaycastHit[] _groundedHits = new RaycastHit[3];
+        Vector3? _lastGroundNormal;
+        float _isGroundedRadius;
         
         Rigidbody _rigidbody;
-        
-        PlayerInputs _playerInputs;
-        
+
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _rigidbody.maxLinearVelocity = _maxSpeed;
-
-            if (_playerInputs == null)
-            {
-                _playerInputs = ServiceProvider.Get<InputService>().PlayerInputs;
-            }
-            //_playerInputs.Movement.Direction.performed += Move;
-            _playerInputs.Movement.Jump.performed += Jump;
             
+            _isGroundedRadius = _baseCollider.radius * _baseCollider.transform.lossyScale.y *
+                                _groundedScale;
         }
 
-        void Jump(InputAction.CallbackContext obj)
+        public void Jump(InputAction.CallbackContext obj)
         {
-            _rigidbody.AddForce(transform.up * _jumpForce, ForceMode.Impulse);
+            if (!obj.performed) return;
+
+            _lastGroundNormal = IsGrounded();
+            if (_lastGroundNormal == null) return;
+            
+            _rigidbody.AddForce(_lastGroundNormal.Value * _jumpForce, ForceMode.Impulse);
         }
 
-        void OnEnable()
+        public void ReadMovementDirection(InputAction.CallbackContext obj)
         {
-            _playerInputs.Movement.Enable();
+            Vector2 inputDirection = obj.ReadValue<Vector2>();
+            _movementDirection = new Vector3(inputDirection.x, 0f, inputDirection.y);
         }
 
-        void OnDisable()
+        void FixedUpdate()
         {
-            _playerInputs.Movement.Disable();
+            Move();
         }
 
+        void Move()
+        {
+            _rigidbody.AddForce(_movementDirection * _acceleration);
+        }
+
+        Vector3? IsGrounded()
+        {
+            int hitsSize = Physics.SphereCastNonAlloc(transform.position,
+                _isGroundedRadius, Vector3.down, _groundedHits,
+                _groundedOffset, _jumpSurfacesLayer, QueryTriggerInteraction.Ignore);
+            if (hitsSize == 0)
+            {
+                return null;
+            }
+
+            RaycastHit firstHit = _groundedHits[0];
+            return firstHit.normal;
+        }
+        
+#if UNITY_EDITOR
         void Update()
         {
-            Move(_playerInputs.Movement.Direction.ReadValue<Vector2>());
+            _isGroundedRadius = _baseCollider.radius * _baseCollider.transform.lossyScale.y *
+                                _groundedScale;
         }
 
-        void Move(Vector2 inputDirection)
+        [SerializeField] bool _drawGizmos = true;
+        void OnDrawGizmos()
         {
-            var movementDirection = new Vector3(inputDirection.x, 0f, inputDirection.y);
-            _rigidbody.AddForce(movementDirection * _acceleration);
-        }
+            if (!_drawGizmos) return;
+            
+            Gizmos.color = Color.red * 0.5f;
+            
+            Gizmos.DrawSphere(transform.position + Vector3.down * _groundedOffset,
+                _isGroundedRadius);
 
-        void OnDestroy()
-        {
-            //_playerInputs.Movement.Direction.performed -= Move;
+            if (_lastGroundNormal != null)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(
+                    transform.position - Vector3.Scale(_lastGroundNormal.Value,
+                        _baseCollider.radius * _baseCollider.transform.lossyScale),
+                    transform.position + _lastGroundNormal.Value * 10);
+            }
         }
+#endif
     }
 }
